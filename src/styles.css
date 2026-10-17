@@ -171,8 +171,8 @@ main { width: 100%; max-width: 1240px; padding-left: 28px; padding-right: max(28
 .seg button { background: none; border: 0; padding: 4px 10px; font-size: .8rem; }
 .seg button[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); }
 .tabs { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
-.tabs.scroll { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; padding-bottom: 2px; }
-.tabs button { flex: none; border: 1px solid var(--line); background: var(--surface); border-radius: 999px; padding: 6px 14px; font-size: .88rem; font-weight: 500; }
+.tabs.scroll { flex-wrap: wrap; }
+.tabs button { flex: none; max-width: 100%; border: 1px solid var(--line); background: var(--surface); border-radius: 999px; padding: 6px 14px; font-size: .88rem; font-weight: 500; }
 .tabs button[aria-pressed="true"] { background: var(--accent-soft); color: var(--accent); border-color: var(--accent); }
 .tabs button small { opacity: .7; }
 .chips { display: flex; flex-wrap: wrap; gap: 4px; }
@@ -398,11 +398,13 @@ th { font-size: .75rem; text-transform: uppercase; letter-spacing: .06em; color:
 .count.good { color: var(--ok); } .count.warn { color: var(--gold); }
 
 /* ---------- Bài học ---------- */
-.lvtabs { display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; padding-bottom: 2px; }
+.lvtabs { display: flex; flex-wrap: wrap; gap: 6px; }
+@media (max-width: 560px) { .lvtabs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); } .lvtabs button { flex: auto; } }
 .lvtabs button { flex: none; display: flex; flex-direction: column; align-items: flex-start; border: 1px solid var(--line); border-radius: var(--r); background: var(--surface); padding: 8px 14px; text-align: left; }
 .lvtabs button small { font-size: .7rem; color: var(--muted); }
 .lvtabs button[aria-pressed="true"] { border-color: var(--accent); background: var(--accent-soft); }
-.skilltabs { display: flex; border-bottom: 1px solid var(--line); overflow-x: auto; scrollbar-width: none; }
+.skilltabs { display: flex; flex-wrap: wrap; border-bottom: 1px solid var(--line); }
+@media (max-width: 560px) { .skilltabs { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-bottom: 0; gap: 4px; } .skilltabs button { padding: 7px 4px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); } .skilltabs button[aria-pressed="true"] { border-color: var(--accent); background: var(--accent-soft); } }
 .skilltabs button { flex: none; background: none; border: 0; border-bottom: 2px solid transparent; padding: 8px 14px; font-weight: 500; color: var(--muted); }
 .skilltabs button[aria-pressed="true"] { color: var(--accent); border-bottom-color: var(--accent); }
 .dlg { display: flex; flex-direction: column; gap: 8px; }
@@ -467,3 +469,7 @@ th { font-size: .75rem; text-transform: uppercase; letter-spacing: .06em; color:
   .more-link { display: inline-flex; align-self: flex-start; }
 }
 .legal h3 { margin-top: 6px; } .legal p, .legal li { max-width: 68ch; }
+@media (max-width: 560px) {
+  .skilltabs button { white-space: nowrap; font-size: .82rem; padding: 8px 2px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); }
+  .skilltabs button[aria-pressed="true"] { border-color: var(--accent); background: var(--accent-soft); color: var(--accent); }
+}

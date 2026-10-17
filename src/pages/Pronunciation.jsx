@@ -15,7 +15,7 @@ export default function Pronunciation() {
         <div className="sec-h"><span className="eyebrow">발음 · Phát âm</span><h2>Cách đặt lưỡi và khẩu hình</h2>
           <p className="lead">Sơ đồ mặt cắt khoang miệng cho thấy lưỡi, môi, vòm mềm di chuyển thế nào và luồng hơi đi ra đâu. Chọn nhóm âm, rồi bấm "Xem chuyển động" để xem từng bước kèm âm thanh.</p></div>
         <div className="tabs scroll" role="group">
-          {ARTIC.map((a, i) => <button key={a.id} type="button" aria-pressed={i === g} onClick={() => setG(i)}>{a.title} <span className="ko">{a.sub.split(' ').slice(0, 4).join(' ')}</span></button>)}
+          {ARTIC.map((a, i) => <button key={a.id} type="button" aria-pressed={i === g} onClick={() => setG(i)}>{a.title} <span className="ko muted">{a.sub}</span></button>)}
         </div>
         <div className="card"><MouthDiagram key={ARTIC[g].id} group={ARTIC[g]} /></div>
       </section>
