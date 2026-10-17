@@ -17,6 +17,7 @@ export default function Help() {
       <div className="card sec"><h3>Tốc độ đọc mẫu</h3><p className="small muted">Áp dụng cho mọi nút nghe trong ứng dụng.</p><div><RateToggle /></div></div>
       <InstallCard />
       {FAQ.map(([q, a]) => <details key={q} className="faq"><summary>{q}</summary><p className="small">{a}</p></details>)}
+      <p className="small muted"><Link to="/chinh-sach-bao-mat">Chính sách quyền riêng tư</Link> · <Link to="/dieu-khoan">Điều khoản sử dụng</Link></p>
       <p className="small muted">Chưa có tài khoản? <Link to="/dang-nhap">Đăng ký miễn phí</Link>.</p>
     </section>
   );

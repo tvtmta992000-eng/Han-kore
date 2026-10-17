@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Navigate } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import { useAuth } from '../lib/store.jsx';
 import { authEnabled } from '../lib/supabase.js';
 
@@ -71,6 +71,7 @@ export default function Login() {
           Tiếp tục với Google
         </button>
       </>}
+      <p className="small muted">Khi tiếp tục, bạn đồng ý với <Link to="/dieu-khoan">Điều khoản</Link> và <Link to="/chinh-sach-bao-mat">Chính sách quyền riêng tư</Link>.</p>
       <p className="small">
         {mode === 'forgot'
           ? <button type="button" className="link" onClick={() => setMode('in')}>Quay lại đăng nhập</button>

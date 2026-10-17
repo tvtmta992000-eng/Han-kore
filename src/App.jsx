@@ -3,6 +3,7 @@ import { NavLink, Route, Routes, useLocation, Link } from 'react-router-dom';
 import Sidebar from './components/Sidebar.jsx';
 import Topbar from './components/Topbar.jsx';
 import Help from './pages/Help.jsx';
+import { Privacy, Terms } from './pages/Legal.jsx';
 import Icon from './components/Icon.jsx';
 import { stopAudio } from './lib/audio.js';
 import Home from './pages/Home.jsx';
@@ -48,6 +49,8 @@ export default function App() {
           <Route path="/bai-hoc/:id" element={<Lesson />} />
           <Route path="/luyen-tap" element={<Practice />} />
           <Route path="/huong-dan" element={<Help />} />
+          <Route path="/chinh-sach-bao-mat" element={<Privacy />} />
+          <Route path="/dieu-khoan" element={<Terms />} />
           <Route path="*" element={<div className="sec"><h2>Không tìm thấy trang</h2><Link to="/" className="btn">Về trang chủ</Link></div>} />
         </Routes>
       </main>

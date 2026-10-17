@@ -466,3 +466,4 @@ th { font-size: .75rem; text-transform: uppercase; letter-spacing: .06em; color:
   .courses .course:nth-child(n+5) { display: none; }
   .more-link { display: inline-flex; align-self: flex-start; }
 }
+.legal h3 { margin-top: 6px; } .legal p, .legal li { max-width: 68ch; }
