@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { ALL_WORDS, LEVEL_NAMES, TOPICS } from '../data/vocab.js';
 import { useProgress } from '../lib/store.jsx';
@@ -20,8 +20,9 @@ export function makeVocabQuiz(words, n = 10) {
 }
 
 function TopicView({ topic }) {
-  const { p, toggleWord } = useProgress();
+  const { p, toggleWord, visit } = useProgress();
   const [mode, setMode] = useState('list');
+  useEffect(() => { visit({ path: `/tu-vung/${topic.id}`, title: topic.name, type: 'vocab', sub: `${topic.words.length} từ`, preview: topic.words.slice(0, 6).map(w => w.ko) }); }, [topic.id]);
   const make = useCallback(() => makeVocabQuiz(topic.words), [topic]);
   const learned = topic.words.filter(w => p.words[w.ko]).length;
   return (
@@ -43,7 +44,7 @@ function TopicView({ topic }) {
         ))}</div>
       )}
       {mode === 'cards' && <Flashcards words={topic.words} />}
-      {mode === 'quiz' && <Quiz id={`vq-${topic.id}`} make={make} />}
+      {mode === 'quiz' && <Quiz id={`vq-${topic.id}`} make={make} title={`Từ vựng: ${topic.name}`} />}
     </section>
   );
 }

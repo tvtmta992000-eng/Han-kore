@@ -1,9 +1,11 @@
+import useVisit from '../lib/useVisit.js';
 import { useMemo, useState } from 'react';
 import { GRAMMAR } from '../data/grammar.js';
 import { LEVEL_NAMES } from '../data/vocab.js';
 import Say from '../components/Say.jsx';
 
 export default function Grammar() {
+  useVisit({ path: '/ngu-phap', title: 'Ngữ pháp tiếng Hàn', type: 'grammar', sub: '111 cấu trúc', preview: ['-아요/어요','-고 싶다','-기 때문에'] });
   const [lv, setLv] = useState(1);
   const [q, setQ] = useState('');
   const list = useMemo(() => {

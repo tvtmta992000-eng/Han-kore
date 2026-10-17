@@ -52,7 +52,8 @@ export function AuthProvider({ children }) {
 export const useAuth = () => useContext(AuthCtx);
 
 /* ---------- Tiến độ học ---------- */
-const EMPTY = { words: {}, quiz: {}, practiced: {}, drafts: {}, days: {}, lessonsDone: {} };
+const EMPTY = { words: {}, quiz: {}, practiced: {}, drafts: {}, days: {}, lessonsDone: {}, recent: [], activity: [] };
+const LISTS = ['recent', 'activity'];
 const LS_KEY = 'hg-progress';
 
 function loadLocal() {
@@ -63,7 +64,10 @@ function saveLocal(p) { try { localStorage.setItem(LS_KEY, JSON.stringify(p)); }
 // Gộp tiến độ máy và máy chủ: điểm lấy cao nhất, đánh dấu lấy hợp, nháp lấy bản dài hơn.
 function merge(a, b) {
   const out = { ...EMPTY };
-  for (const k of Object.keys(EMPTY)) out[k] = { ...(a[k] || {}), ...(b[k] || {}) };
+  for (const k of Object.keys(EMPTY)) if (!LISTS.includes(k)) out[k] = { ...(a[k] || {}), ...(b[k] || {}) };
+  // Danh sách: gộp, bỏ trùng, mới nhất trước
+  out.recent = dedupe([...(a.recent || []), ...(b.recent || [])], x => x.path).slice(0, 12);
+  out.activity = dedupe([...(a.activity || []), ...(b.activity || [])], x => x.ts + x.text).slice(0, 30);
   for (const id of Object.keys(out.quiz)) out.quiz[id] = Math.max(a.quiz?.[id] ?? 0, b.quiz?.[id] ?? 0);
   for (const id of Object.keys(out.days)) out.days[id] = Math.max(a.days?.[id] ?? 0, b.days?.[id] ?? 0);
   for (const id of Object.keys(out.drafts)) {
@@ -73,12 +77,18 @@ function merge(a, b) {
   return out;
 }
 
+function dedupe(list, key) {
+  const seen = new Set();
+  return list.sort((x, y) => y.ts - x.ts).filter(x => { const k = key(x); if (seen.has(k)) return false; seen.add(k); return true; });
+}
+const log = (s, type, text) => { s.activity = [{ type, text, ts: Date.now() }, ...(s.activity || [])].slice(0, 30); };
+
 const today = () => new Date().toISOString().slice(0, 10);
 const ProgressCtx = createContext(null);
 
 export function ProgressProvider({ children }) {
   const { user } = useAuth();
-  const [p, setP] = useState(loadLocal);
+  const [p, setP] = useState(() => { const l = loadLocal(); return { ...l, recent: l.recent || [], activity: l.activity || [] }; });
   const [sync, setSync] = useState('local'); // local | loading | saved | saving | error
   const timer = useRef(null);
   const loadedFor = useRef(null);
@@ -121,11 +131,16 @@ export function ProgressProvider({ children }) {
   const api = {
     p, sync,
     toggleWord: ko => update(s => { if (s.words[ko]) delete s.words[ko]; else s.words[ko] = 1; return s; }),
-    setScore: (id, score) => update(s => { s.quiz[id] = Math.max(s.quiz[id] || 0, score); return s; }),
+    setScore: (id, score, total, title) => update(s => { s.quiz[id] = Math.max(s.quiz[id] || 0, score); log(s, 'graded', `Đã chấm: ${title || 'Bài tập'} — ${score}/${total ?? '?'}`); return s; }),
     togglePracticed: key => update(s => { if (s.practiced[key]) delete s.practiced[key]; else s.practiced[key] = 1; return s; }),
-    markPracticed: key => update(s => { s.practiced[key] = 1; return s; }),
+    markPracticed: (key, text) => update(s => { if (!s.practiced[key] && text) log(s, 'speak', `Luyện nói: ${text}`); s.practiced[key] = 1; return s; }),
     setDraft: (id, text) => update(s => { s.drafts[id] = text; return s; }),
-    markLesson: id => update(s => { s.lessonsDone[id] = 1; return s; }),
+    markLesson: (id, title) => update(s => { s.lessonsDone[id] = 1; log(s, 'done', `Hoàn thành bài: ${title || id}`); return s; }),
+    visit: item => setP(prev => {
+      if (prev.recent?.[0]?.path === item.path) return prev;
+      const next = { ...prev, recent: dedupe([{ ...item, ts: Date.now() }, ...(prev.recent || [])], x => x.path).slice(0, 12) };
+      saveLocal(next); push(next); return next;
+    }),
     reset: () => { const e = structuredClone(EMPTY); saveLocal(e); setP(e); push(e); }
   };
   return <ProgressCtx.Provider value={api}>{children}</ProgressCtx.Provider>;

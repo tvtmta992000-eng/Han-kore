@@ -51,7 +51,7 @@ export default function SpeakCheck({ text, vi, voice = 'female', pkey }) {
       setUrl(old => { if (old) URL.revokeObjectURL(old); return URL.createObjectURL(blob); });
       stream.current?.getTracks().forEach(t => t.stop());
       setState('done');
-      if (pkey) markPracticed(pkey);
+      if (pkey) markPracticed(pkey, text.length > 40 ? text.slice(0, 40) + '…' : text);
     };
     rec.current = mr;
     mr.start();

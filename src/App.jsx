@@ -1,8 +1,9 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { NavLink, Route, Routes, useLocation, Link } from 'react-router-dom';
+import Sidebar from './components/Sidebar.jsx';
+import Topbar from './components/Topbar.jsx';
+import Help from './pages/Help.jsx';
 import Icon from './components/Icon.jsx';
-import RateToggle from './components/RateToggle.jsx';
-import { useAuth } from './lib/store.jsx';
 import { stopAudio } from './lib/audio.js';
 import Home from './pages/Home.jsx';
 import Login from './pages/Login.jsx';
@@ -18,40 +19,18 @@ import Lessons from './pages/Lessons.jsx';
 import Lesson from './pages/Lesson.jsx';
 import Practice from './pages/Practice.jsx';
 
-export const SECTIONS = [
-  ['/bang-chu-cai', 'Bảng chữ cái', '한글'],
-  ['/phat-am', 'Phát âm', '발음'],
-  ['/luyen-viet', 'Luyện viết', '쓰기'],
-  ['/tu-vung', 'Từ vựng', '어휘'],
-  ['/ngu-phap', 'Ngữ pháp', '문법'],
-  ['/luyen-noi', 'Luyện nói', '말하기'],
-  ['/bai-hoc', 'Bài học', '수업'],
-  ['/luyen-tap', 'Bài tập', '연습']
-];
-
-const TABS = [['/', 'Trang chủ', 'home'], ['/bai-hoc', 'Bài học', 'book'], ['/tu-vung', 'Từ vựng', 'grid'], ['/luyen-noi', 'Luyện nói', 'mic'], ['/tai-khoan', 'Tài khoản', 'user']];
+const TABS = [['/', 'Trang chủ', 'home'], ['/bai-hoc', 'Bài học', 'book'], ['/tu-vung', 'Từ vựng', 'layers'], ['/luyen-noi', 'Luyện nói', 'mic'], ['/tai-khoan', 'Tài khoản', 'user']];
 
 export default function App() {
-  const { user, name } = useAuth();
   const loc = useLocation();
-  useEffect(() => { stopAudio(); window.scrollTo(0, 0); }, [loc.pathname]);
+  const [menu, setMenu] = useState(false);
+  useEffect(() => { stopAudio(); window.scrollTo(0, 0); setMenu(false); }, [loc.pathname]);
 
   return (
-    <>
-      <header className="top">
-        <div className="top-in">
-          <Link to="/" className="brand" aria-label="Về trang chủ"><b>한글길</b><span>Hangul Gil</span></Link>
-          <nav className="main-nav" aria-label="Mục chính">
-            {SECTIONS.map(([to, label]) => <NavLink key={to} to={to}>{label}</NavLink>)}
-          </nav>
-          <div className="top-right">
-            <RateToggle />
-            <Link to={user ? '/tai-khoan' : '/dang-nhap'} className="acct" aria-label={user ? 'Tài khoản' : 'Đăng nhập'}>
-              {user ? <span className="avatar">{(name || '?').slice(0, 1).toUpperCase()}</span> : <span className="btn primary sm">Đăng nhập</span>}
-            </Link>
-          </div>
-        </div>
-      </header>
+    <div className="shell">
+      <Sidebar open={menu} onClose={() => setMenu(false)} />
+      <div className="content">
+        <Topbar onMenu={() => setMenu(true)} />
       <main>
         <Routes>
           <Route path="/" element={<Home />} />
@@ -68,6 +47,7 @@ export default function App() {
           <Route path="/bai-hoc" element={<Lessons />} />
           <Route path="/bai-hoc/:id" element={<Lesson />} />
           <Route path="/luyen-tap" element={<Practice />} />
+          <Route path="/huong-dan" element={<Help />} />
           <Route path="*" element={<div className="sec"><h2>Không tìm thấy trang</h2><Link to="/" className="btn">Về trang chủ</Link></div>} />
         </Routes>
       </main>
@@ -76,6 +56,7 @@ export default function App() {
           <NavLink key={to} to={to} end={to === '/'}><Icon name={icon} size={20} /><span>{label}</span></NavLink>
         ))}
       </nav>
-    </>
+      </div>
+    </div>
   );
 }

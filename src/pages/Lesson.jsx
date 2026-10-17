@@ -8,7 +8,7 @@ import Say from '../components/Say.jsx';
 import Quiz from '../components/Quiz.jsx';
 import Dialogue from '../components/Dialogue.jsx';
 import SpeakCheck from '../components/SpeakCheck.jsx';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const SKILLS = [['vocab', 'Từ vựng'], ['grammar', 'Ngữ pháp'], ['listen', 'Nghe'], ['speak', 'Nói'], ['read', 'Đọc'], ['write', 'Viết'], ['quiz', 'Bài tập']];
 
@@ -41,9 +41,10 @@ function Writing({ l }) {
 export default function Lesson() {
   const { id } = useParams();
   const [sp, setSp] = useSearchParams();
-  const { p, markLesson } = useProgress();
+  const { p, markLesson, visit } = useProgress();
   const l = LESSONS.find(x => x.id === id);
   const [showVi, setShowVi] = useState(false);
+  useEffect(() => { if (l) visit({ path: `/bai-hoc/${l.id}`, title: l.title, type: 'lesson', sub: LEVEL_NAMES[l.level], preview: l.listen.lines.slice(0, 3).map(x => x[1].split(' ').slice(0, 2).join(' ')) }); }, [id]);
   if (!l) return <section className="sec"><h2>Không tìm thấy bài học</h2><Link to="/bai-hoc" className="btn">Danh sách bài học</Link></section>;
   const skill = sp.get('ky-nang') || 'vocab';
   const words = TOPICS.filter(t => l.vocabTopics.includes(t.id));
@@ -74,7 +75,7 @@ export default function Lesson() {
 
       {skill === 'listen' && <>
         <div className="card sec"><h3>{l.listen.title}</h3><p className="small muted">Nghe 2–3 lần, trả lời câu hỏi, rồi mới mở lời thoại để kiểm tra.</p><Dialogue lines={l.listen.lines} /></div>
-        <h3>Câu hỏi nghe hiểu</h3><Quiz id={`ls-${l.id}`} items={l.listen.qs} />
+        <h3>Câu hỏi nghe hiểu</h3><Quiz id={`ls-${l.id}`} items={l.listen.qs} title={`Nghe — ${l.title}`} />
       </>}
 
       {skill === 'speak' && <>
@@ -94,15 +95,15 @@ export default function Lesson() {
           <p className="passage ko">{l.read.text}</p>
           {showVi && <p className="passage vi">{l.read.vi}</p>}
         </div>
-        <h3>Câu hỏi đọc hiểu</h3><Quiz id={`rd-${l.id}`} items={l.read.qs} />
+        <h3>Câu hỏi đọc hiểu</h3><Quiz id={`rd-${l.id}`} items={l.read.qs} title={`Đọc — ${l.title}`} />
       </>}
 
       {skill === 'write' && <Writing l={l} />}
 
       {skill === 'quiz' && <>
-        <Quiz id={`lv-${l.id}`} items={l.quiz} />
+        <Quiz id={`lv-${l.id}`} items={l.quiz} title={l.title} />
         <div className="row">
-          <button type="button" className="btn primary" onClick={() => markLesson(l.id)} disabled={!!p.lessonsDone[l.id]}>{p.lessonsDone[l.id] ? 'Đã hoàn thành bài này' : 'Đánh dấu hoàn thành bài'}</button>
+          <button type="button" className="btn primary" onClick={() => markLesson(l.id, l.title)} disabled={!!p.lessonsDone[l.id]}>{p.lessonsDone[l.id] ? 'Đã hoàn thành bài này' : 'Đánh dấu hoàn thành bài'}</button>
           {next && <Link className="btn" to={`/bai-hoc/${next.id}`}>Bài tiếp: {next.title} →</Link>}
         </div>
       </>}

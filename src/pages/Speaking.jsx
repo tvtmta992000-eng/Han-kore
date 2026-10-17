@@ -1,3 +1,4 @@
+import useVisit from '../lib/useVisit.js';
 import { useState } from 'react';
 import { PHRASE_SETS } from '../data/phrases.js';
 import { LEVEL_NAMES } from '../data/vocab.js';
@@ -5,6 +6,7 @@ import { useProgress } from '../lib/store.jsx';
 import SpeakCheck from '../components/SpeakCheck.jsx';
 
 export default function Speaking() {
+  useVisit({ path: '/luyen-noi', title: 'Luyện nói có chấm điểm', type: 'speak', sub: '96 mẫu câu', preview: ['안녕하세요','감사합니다'] });
   const [i, setI] = useState(0);
   const { p } = useProgress();
   const set = PHRASE_SETS[i];

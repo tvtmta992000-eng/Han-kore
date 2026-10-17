@@ -1,3 +1,4 @@
+import useVisit from '../lib/useVisit.js';
 import { useState } from 'react';
 import STROKES from '../data/strokes.json';
 import StrokeVideo from '../components/StrokeVideo.jsx';
@@ -12,6 +13,7 @@ const STRUCT = [
 ];
 
 export default function Writing() {
+  useVisit({ path: '/luyen-viet', title: 'Luyện viết chữ Hàn', type: 'write', sub: 'Video nét + ô tập viết', preview: ['ㄹ','ㅂ','ㅎ','원고지'] });
   const [ch, setCh] = useState('ㄱ');
   const [own, setOwn] = useState('');
   const [guide, setGuide] = useState('ㄱ');

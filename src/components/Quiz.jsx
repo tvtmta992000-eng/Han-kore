@@ -6,7 +6,7 @@ const shuffle = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { c
 
 // items: [{q, o:[đúng, sai...], a?:index đúng, ko, oko, audio, ex}] hoặc {t:'order', q, w:[...]}
 // make: hàm tạo bộ câu mới mỗi lần làm lại (dùng cho bài tập ngẫu nhiên).
-export default function Quiz({ id, items, make }) {
+export default function Quiz({ id, items, make, title }) {
   const { p, setScore } = useProgress();
   const [round, setRound] = useState(0);
   const set = useMemo(() => {
@@ -27,7 +27,7 @@ export default function Quiz({ id, items, make }) {
     const ok = it.t === 'order' ? v.every((w, k) => w === k) : v === it.a;
     const next = { ...ans, [i]: { v, ok } };
     setAns(next);
-    if (Object.keys(next).length === total) setScore(id, Object.values(next).filter(x => x.ok).length);
+    if (Object.keys(next).length === total) setScore(id, Object.values(next).filter(x => x.ok).length, total, title);
   }
   function restart() { setAns({}); setPick({}); setRound(r => r + 1); }
 

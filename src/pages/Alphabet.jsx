@@ -1,3 +1,4 @@
+import useVisit from '../lib/useVisit.js';
 import { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ALPHABET_GROUPS } from '../data/hangul.js';
@@ -8,6 +9,7 @@ import TraceCanvas from '../components/TraceCanvas.jsx';
 import Say from '../components/Say.jsx';
 
 export default function Alphabet() {
+  useVisit({ path: '/bang-chu-cai', title: 'Bảng chữ cái Hangul', type: 'alphabet', sub: '40 chữ cái · video nét', preview: ['ㄱ','ㄴ','ㄷ','ㅏ','ㅓ','ㅗ'] });
   const [g, setG] = useState(0);
   const [sel, setSel] = useState(ALPHABET_GROUPS[0].list[0]);
   const [b, setB] = useState([0, 0, 0]);

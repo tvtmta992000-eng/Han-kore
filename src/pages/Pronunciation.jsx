@@ -1,3 +1,4 @@
+import useVisit from '../lib/useVisit.js';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ARTIC, MINIMAL, PATCHIM, RULES } from '../data/hangul.js';
@@ -6,6 +7,7 @@ import Say from '../components/Say.jsx';
 import { play } from '../lib/audio.js';
 
 export default function Pronunciation() {
+  useVisit({ path: '/phat-am', title: 'Khẩu hình phát âm', type: 'pron', sub: '10 nhóm âm · 7 quy tắc', preview: ['가','카','까','국물','[궁물]'] });
   const [g, setG] = useState(0);
   return (
     <>
