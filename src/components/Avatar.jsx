@@ -7,6 +7,8 @@ export const CHARACTERS = {
   anchor: { name: '앵커', vi: 'Phát thanh viên', skin: '#F2C6A0', hair: '#111827', hairStyle: 'side', top: '#1E3A8A', collar: 'tie' },
   prof: { name: '교수님', vi: 'Giáo sư', skin: '#F5CFAE', hair: '#6B7280', hairStyle: 'bun', top: '#7C3AED', collar: 'blazer', glasses: true },
   reporter: { name: '기자', vi: 'Phóng viên', skin: '#EDBE94', hair: '#3F2A1D', hairStyle: 'short', top: '#0F766E', collar: 'round', glasses: true },
+  doctor: { name: '의사', vi: 'Bác sĩ', skin: '#F2C6A0', hair: '#374151', hairStyle: 'side', top: '#FFFFFF', collar: 'coat', glasses: true },
+  barista: { name: '직원', vi: 'Nhân viên', skin: '#EDBE94', hair: '#1F2937', hairStyle: 'short', top: '#6B3F1D', collar: 'apron' },
   hanbok: { name: '진행자', vi: 'Người tổ chức', skin: '#F7D3B5', hair: '#111827', hairStyle: 'bun', top: '#DC2626', collar: 'hanbok' }
 };
 
@@ -28,6 +30,7 @@ function Top({ c }) {
     case 'apron': return <>{body}<path d="M36 76h28l4 24H32z" fill="#FDE7C2" /><path d="M38 76l-6-4M62 76l6-4" stroke="#FDE7C2" strokeWidth="3" /></>;
     case 'tie': return <>{body}<path d="M42 72l8 10 8-10" fill="#FFFFFF" /><path d="M50 80l-3 4 3 14 3-14z" fill="#E5484D" /></>;
     case 'blazer': return <>{body}<path d="M42 72l8 12 8-12" fill="#EDE9FE" /><path d="M42 72l6 28M58 72l-6 28" stroke="#5B21B6" strokeWidth="2" /></>;
+    case 'coat': return <><path d="M14 100c0-18 14-28 36-28s36 10 36 28z" fill="#FFFFFF" stroke="#CBD5E1" strokeWidth="2" /><path d="M42 72l8 12 8-12" fill="#93C5FD" /><path d="M38 76c-4 10 0 16 6 16M62 76c4 10 0 16-6 16" stroke="#374151" strokeWidth="2.5" fill="none" /><circle cx="50" cy="92" r="3" fill="#374151" /></>;
     case 'hanbok': return <>{body}<path d="M40 72l10 14 10-14" fill="#FFFFFF" /><path d="M50 86c-6 4-6 10-2 14M50 86c6 4 6 10 2 14" stroke="#FACC15" strokeWidth="3" fill="none" /><path d="M14 100c0-12 8-20 18-24v24zM86 100c0-12-8-20-18-24v24z" fill="#FACC15" /></>;
     default: return <>{body}<path d="M40 73c4 5 16 5 20 0" stroke="#FFFFFF" strokeWidth="2.5" fill="none" opacity=".7" /></>;
   }

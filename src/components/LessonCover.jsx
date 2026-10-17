@@ -17,7 +17,8 @@ export default function LessonCover({ id, className = '' }) {
         </svg>
       ))}
       {c.props.map((k, i) => {
-        const svg = iconFor({ ko: k });
+        const [topic, ko] = k.includes(':') ? k.split(':') : [undefined, k];
+        const svg = iconFor({ ko, topic });
         return svg ? (
           <g key={k}>
             <circle cx={cast.length === 1 ? 60 + i * 200 : 150 + i * 20} cy={cast.length === 1 ? 140 : 132 - i * 34} r="20" fill="#FFFFFF" opacity=".9" />

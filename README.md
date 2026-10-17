@@ -9,10 +9,11 @@ Website + ứng dụng điện thoại (PWA) học tiếng Hàn từ bảng ch�
 | Bảng chữ cái | 40 chữ cái, mỗi chữ có **video thứ tự nét** (MP4 + WebM), âm thanh, từ ví dụ, ô tập viết bằng tay/chuột, công cụ ghép âm tiết |
 | Phát âm | **Sơ đồ khẩu hình chuyển động** (mặt cắt miệng: vị trí lưỡi, môi, vòm mềm, luồng hơi) cho 10 nhóm âm; âm thường/bật hơi/căng; 7 âm patchim; 7 quy tắc biến âm |
 | Luyện viết | Video nét + ô tập viết, cấu trúc khối chữ, quy tắc cách chữ, cách viết giấy ô 원고지 TOPIK |
-| Từ vựng | **1.057 từ / 33 chủ đề**, chia 5 cấp; nghe từng từ, thẻ ghi nhớ, đánh dấu đã thuộc, bài kiểm tra tự sinh |
+| Từ vựng | **1.080 từ / 34 chủ đề**, 221 từ có tranh minh họa, chia 5 cấp; nghe từng từ, thẻ ghi nhớ, đánh dấu đã thuộc, bài kiểm tra tự sinh |
 | Ngữ pháp | **111 cấu trúc câu** từ sơ cấp đến cao cấp, mỗi cấu trúc có cách dùng và 2 câu ví dụ đọc mẫu |
 | Luyện nói | **96 mẫu câu / 12 tình huống**: nghe mẫu → ghi âm giọng mình → nghe lại → máy chấm điểm phát âm (0–100) |
-| Bài học | 10 bài (2 bài × 5 cấp), mỗi bài: từ vựng, ngữ pháp, hội thoại nghe (2 giọng nam/nữ), nói, đọc, đề viết dạng TOPIK có bài mẫu, bài tập |
+| Bài học | 30 bài (6 bài × 5 cấp) có truyện tranh hội thoại và ảnh bìa, mỗi bài: từ vựng, ngữ pháp, hội thoại nghe (2 giọng nam/nữ), nói, đọc, đề viết dạng TOPIK có bài mẫu, bài tập |
+| Trò chơi | Nghe chọn hình, lật thẻ ghép cặp, đua 60 giây, xếp chữ |
 | Bài tập | Nghe phân biệt chữ, phát âm đúng, từ vựng & ngữ pháp theo cấp (đề mới mỗi lần làm) |
 | Tài khoản | Đăng ký / đăng nhập email hoặc Google, quên mật khẩu, đồng bộ tiến độ giữa các thiết bị, chuỗi ngày học |
 
