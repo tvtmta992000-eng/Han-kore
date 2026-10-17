@@ -1,6 +1,7 @@
 import { Link, useSearchParams } from 'react-router-dom';
 import { LESSONS, LEVELS } from '../data/lessons.js';
 import { useProgress } from '../lib/store.jsx';
+import LessonCover from '../components/LessonCover.jsx';
 
 export default function Lessons() {
   const [sp, setSp] = useSearchParams();
@@ -19,7 +20,8 @@ export default function Lessons() {
         const tot = l.quiz.length + l.listen.qs.length + l.read.qs.length;
         const got = (p.quiz['lv-' + l.id] || 0) + (p.quiz['ls-' + l.id] || 0) + (p.quiz['rd-' + l.id] || 0);
         return (
-          <Link key={l.id} to={`/bai-hoc/${l.id}`} className="card lesson-card">
+          <Link key={l.id} to={`/bai-hoc/${l.id}`} className="card lesson-card has-cover">
+            <LessonCover id={l.id} />
             <span className="tag">Bài {i + 1}{p.lessonsDone[l.id] ? ' · Đã hoàn thành' : ''}</span>
             <b>{l.title}</b>
             <span className="small muted">{l.goal}</span>

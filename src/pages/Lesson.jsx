@@ -7,7 +7,8 @@ import { useProgress } from '../lib/store.jsx';
 import Say from '../components/Say.jsx';
 import WordIcon from '../components/WordIcon.jsx';
 import Quiz from '../components/Quiz.jsx';
-import Dialogue from '../components/Dialogue.jsx';
+import Comic from '../components/Comic.jsx';
+import LessonCover from '../components/LessonCover.jsx';
 import SpeakCheck from '../components/SpeakCheck.jsx';
 import { useEffect, useState } from 'react';
 
@@ -57,7 +58,10 @@ export default function Lesson() {
   return (
     <section className="sec">
       <Link to={`/bai-hoc?cap=${l.level}`} className="small">← {LEVEL_NAMES[l.level]}</Link>
-      <div className="sec-h"><span className="eyebrow">{LEVEL_NAMES[l.level]}</span><h2>{l.title}</h2><p className="lead">Mục tiêu: {l.goal}</p></div>
+      <div className="lesson-head">
+        <LessonCover id={l.id} className="lesson-head-cover" />
+        <div className="sec-h"><span className="eyebrow">{LEVEL_NAMES[l.level]}</span><h2>{l.title}</h2><p className="lead">Mục tiêu: {l.goal}</p></div>
+      </div>
       <div className="skilltabs" role="group" aria-label="Kỹ năng">
         {SKILLS.map(([k, label]) => <button key={k} type="button" aria-pressed={k === skill} onClick={() => setSp({ 'ky-nang': k }, { replace: true })}>{label}</button>)}
       </div>
@@ -75,7 +79,7 @@ export default function Lesson() {
       ))}</div>}
 
       {skill === 'listen' && <>
-        <div className="card sec"><h3>{l.listen.title}</h3><p className="small muted">Nghe 2–3 lần, trả lời câu hỏi, rồi mới mở lời thoại để kiểm tra.</p><Dialogue lines={l.listen.lines} /></div>
+        <div className="card sec"><h3>{l.listen.title}</h3><p className="small muted">Nghe 2–3 lần, trả lời câu hỏi, rồi mới mở lời thoại để kiểm tra.</p><Comic lessonId={l.id} lines={l.listen.lines} /></div>
         <h3>Câu hỏi nghe hiểu</h3><Quiz id={`ls-${l.id}`} items={l.listen.qs} title={`Nghe — ${l.title}`} />
       </>}
 

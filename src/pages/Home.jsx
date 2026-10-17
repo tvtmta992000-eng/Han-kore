@@ -5,6 +5,7 @@ import { LESSONS, LEVELS } from '../data/lessons.js';
 import { LEVEL_NAMES } from '../data/vocab.js';
 import Icon from '../components/Icon.jsx';
 import InstallCard from '../components/InstallCard.jsx';
+import LessonCover from '../components/LessonCover.jsx';
 
 // Mỗi cấp một màu, mỗi bài một chữ Hàn làm biểu tượng.
 const LV_TONE = { 1: 'blue', 2: 'green', 3: 'orange', 4: 'violet', 5: 'pink' };
@@ -84,7 +85,7 @@ export default function Home() {
               const skill = NEXT_SKILL[Math.min(done, NEXT_SKILL.length - 1)];
               return (
                 <Link key={l.id} to={`/bai-hoc/${l.id}?ky-nang=${skill}`} className="sched card">
-                  <span className={`glyph tone-${LV_TONE[l.level]}`}>{GLYPH[l.id]}</span>
+                  <div className="sched-cover"><LessonCover id={l.id} /><span className={`glyph tone-${LV_TONE[l.level]}`}>{GLYPH[l.id]}</span></div>
                   <b>{l.title}</b>
                   <div className="sched-meta"><span>{LEVEL_NAMES[l.level]}</span><span>Bước <em>{done} / {total}</em></span></div>
                   <div className="prog"><span className="bar"><i style={{ width: pct + '%' }} /></span><b>{pct}%</b></div>
