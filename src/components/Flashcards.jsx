@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { play } from '../lib/audio.js';
 import { useProgress } from '../lib/store.jsx';
 import Icon from './Icon.jsx';
+import WordIcon from './WordIcon.jsx';
 
 const shuffle = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
 
@@ -30,7 +31,7 @@ export default function Flashcards({ words }) {
         <button type="button" className="btn sm" onClick={() => setSeed(s => s + 1)}><Icon name="refresh" size={14} /> Trộn</button>
       </div>
       <button type="button" className="fc" onClick={() => setFlip(f => !f)}>
-        {flip ? <><span className="vi">{w.vi}</span><span className="ko muted">{w.ko}</span></> : <><span className="ko">{w.ko}</span><small>Chạm để lật thẻ</small></>}
+        {flip ? <><WordIcon word={w} size={72} /><span className="vi">{w.vi}</span><span className="ko muted">{w.ko}</span></> : <><WordIcon word={w} size={88} /><span className="ko">{w.ko}</span><small>Chạm để lật thẻ</small></>}
       </button>
       <div className="row center">
         <button type="button" className="btn" onClick={() => go(-1)}>← Trước</button>

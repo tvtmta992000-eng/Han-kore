@@ -5,6 +5,7 @@ import { GRAMMAR } from '../data/grammar.js';
 import { PHRASE_SETS } from '../data/phrases.js';
 import { useProgress } from '../lib/store.jsx';
 import Say from '../components/Say.jsx';
+import WordIcon from '../components/WordIcon.jsx';
 import Quiz from '../components/Quiz.jsx';
 import Dialogue from '../components/Dialogue.jsx';
 import SpeakCheck from '../components/SpeakCheck.jsx';
@@ -64,7 +65,7 @@ export default function Lesson() {
       {skill === 'vocab' && words.map(t => (
         <div key={t.id} className="sec">
           <div className="row" style={{ justifyContent: 'space-between' }}><h3>{t.name}</h3><Link className="btn sm" to={`/tu-vung/${t.id}`}>Thẻ ghi nhớ & kiểm tra</Link></div>
-          <div className="vocab">{t.words.map(w => <div key={w.ko} className="vw"><Say text={w.ko} /><div className="t"><span className="ko">{w.ko}</span><small>{w.vi}</small></div></div>)}</div>
+          <div className="vocab">{t.words.map(w => <div key={w.ko} className="vw"><WordIcon word={w} /><Say text={w.ko} /><div className="t"><span className="ko">{w.ko}</span><small>{w.vi}</small></div></div>)}</div>
         </div>
       ))}
 

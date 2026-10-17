@@ -7,6 +7,8 @@ import Flashcards from '../components/Flashcards.jsx';
 import Quiz from '../components/Quiz.jsx';
 import Icon from '../components/Icon.jsx';
 import { playSequence } from '../lib/audio.js';
+import WordIcon from '../components/WordIcon.jsx';
+import { iconFor } from '../data/icons.js';
 
 const pickN = (arr, n) => arr.slice().sort(() => Math.random() - 0.5).slice(0, n);
 
@@ -37,8 +39,9 @@ function TopicView({ topic }) {
       {mode === 'list' && (
         <div className="vocab">{topic.words.map(w => (
           <div key={w.ko} className={`vw ${p.words[w.ko] ? 'known' : ''}`}>
-            <Say text={w.ko} />
+            <WordIcon word={w} />
             <div className="t"><span className="ko">{w.ko}</span><small>{w.vi}</small></div>
+            <Say text={w.ko} />
             <button type="button" className="tick" aria-pressed={!!p.words[w.ko]} aria-label="Đánh dấu đã thuộc" onClick={() => toggleWord(w.ko)}><Icon name="check" size={14} /></button>
           </div>
         ))}</div>
@@ -80,6 +83,7 @@ export default function Vocab() {
             const k = t.words.filter(w => p.words[w.ko]).length;
             return (
               <Link key={t.id} to={`/tu-vung/${t.id}`} className="topic">
+                {t.words.some(iconFor) && <span className="topic-icons">{t.words.filter(iconFor).slice(0, 4).map(w => <WordIcon key={w.ko} word={w} size={34} />)}</span>}
                 <span className="tag">{LEVEL_NAMES[t.level]}</span>
                 <b>{t.name}</b>
                 <span className="ko small muted">{t.words.slice(0, 4).map(w => w.ko).join(' · ')}</span>

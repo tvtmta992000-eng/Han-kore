@@ -15,7 +15,8 @@ export const MENU = [
     ['/bang-chu-cai', 'Bảng chữ cái', 'abc'],
     ['/phat-am', 'Khẩu hình phát âm', 'wave'],
     ['/luyen-viet', 'Luyện viết', 'pen'],
-    ['/luyen-noi', 'Luyện nói', 'mic']
+    ['/luyen-noi', 'Luyện nói', 'mic'],
+    ['/tro-choi', 'Trò chơi', 'grid']
   ]],
   ['Tài khoản', [
     ['/tai-khoan', 'Hồ sơ', 'user'],

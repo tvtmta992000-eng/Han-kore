@@ -446,6 +446,30 @@ const RAW = [
 발|Bàn chân
 발가락|Ngón chân
 피부|Da` },
+  { id: 'dong-vat', name: 'Động vật', level: 1, words: `
+동물|Động vật
+개|Con chó
+고양이|Con mèo
+새|Con chim
+물고기|Con cá
+소|Con bò
+돼지|Con lợn
+닭|Con gà
+말|Con ngựa
+토끼|Con thỏ
+호랑이|Con hổ
+곰|Con gấu
+원숭이|Con khỉ
+코끼리|Con voi
+뱀|Con rắn
+쥐|Con chuột
+양|Con cừu
+오리|Con vịt
+나비|Con bướm
+개미|Con kiến
+거북이|Con rùa
+키우다|Nuôi
+귀엽다|Dễ thương` },
   { id: 'mua-sam', name: 'Mua sắm & quần áo', level: 2, words: `
 쇼핑|Mua sắm
 가게|Cửa hàng

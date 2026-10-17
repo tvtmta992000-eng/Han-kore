@@ -473,3 +473,44 @@ th { font-size: .75rem; text-transform: uppercase; letter-spacing: .06em; color:
   .skilltabs button { white-space: nowrap; font-size: .82rem; padding: 8px 2px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); }
   .skilltabs button[aria-pressed="true"] { border-color: var(--accent); background: var(--accent-soft); color: var(--accent); }
 }
+.wicon { display: inline-grid; flex: none; border-radius: 10px; background: var(--sunken); padding: 3px; }
+.wicon svg { display: block; }
+.topic-icons { display: flex; gap: 6px; margin-bottom: 2px; }
+.fc .wicon { background: transparent; }
+
+/* ---------- Trò chơi ---------- */
+.games { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 12px; }
+.game-card { display: flex; flex-direction: column; gap: 6px; text-align: left; }
+.game-card:hover { border-color: var(--accent); }
+.game-ic { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 12px; background: var(--accent-soft); color: var(--accent); margin-bottom: 4px; }
+.game-stage { max-width: 760px; }
+.game-bar { display: flex; justify-content: space-between; font-size: .9rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+.game-bar b { color: var(--ink); }
+.big-listen { align-self: center; display: inline-flex; align-items: center; gap: 10px; padding: 14px 26px; border-radius: 999px; border: 0; background: var(--accent); color: var(--accent-ink); font-weight: 600; font-size: 1rem; }
+.pic-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.pic { display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 14px; border: 2px solid var(--line); border-radius: var(--r); background: var(--surface); }
+.pic:hover { border-color: var(--accent); }
+.pic.right { border-color: var(--ok); background: var(--ok-soft); }
+.pic.wrong { border-color: var(--bad); background: var(--bad-soft); }
+.pic .wicon, .mem .wicon, .race-pic .wicon, .spell-top .wicon { background: transparent; }
+.mem-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
+@media (max-width: 520px) { .mem-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.mem { aspect-ratio: 1; display: grid; place-items: center; border-radius: var(--r); border: 2px solid var(--line); background: var(--accent); color: #fff; padding: 4px; }
+.mem.show { background: var(--surface); color: var(--ink); }
+.mem.done { border-color: var(--ok); background: var(--ok-soft); }
+.mem-back { font-size: 1.6rem; font-weight: 700; opacity: .8; }
+.mem-word { font-size: 1.15rem; font-weight: 600; text-align: center; }
+.race-bar { height: 6px; }
+.race-pic { align-self: center; border-radius: 16px; padding: 8px; border: 3px solid transparent; transition: border-color .15s; }
+.race-pic.right { border-color: var(--ok); } .race-pic.wrong { border-color: var(--bad); }
+.race-opt { font-size: 1.1rem; text-align: center; padding: 12px; }
+.spell-top { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.spell-slots { display: flex; justify-content: center; gap: 6px; }
+.slot { width: 48px; height: 54px; border-radius: 10px; border: 2px dashed var(--line); display: grid; place-items: center; font-size: 1.6rem; font-weight: 600; }
+.spell-slots.right .slot { border: 2px solid var(--ok); background: var(--ok-soft); }
+.spell-slots.wrong .slot { border: 2px solid var(--bad); background: var(--bad-soft); }
+.wchip.big { font-size: 1.4rem; padding: 8px 16px; }
+.chips.center, .center { justify-content: center; text-align: center; }
+.game-result { display: flex; flex-direction: column; align-items: center; gap: 8px; text-align: center; padding: 28px; }
+.result-num { font-size: 3rem; font-weight: 700; color: var(--accent); line-height: 1; font-variant-numeric: tabular-nums; }
+.result-num small { font-size: 1.2rem; color: var(--muted); }
