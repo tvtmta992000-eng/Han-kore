@@ -1,0 +1,1 @@
+{ "rewrites": [{ "source": "/((?!audio/|video/|icons/|assets/).*)", "destination": "/index.html" }] }

@@ -1,0 +1,27 @@
+# Tự động tạo file âm thanh MP3 khi dữ liệu bài học thay đổi, rồi commit vào kho mã.
+name: Tạo âm thanh tiếng Hàn
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['src/data/**', 'scripts/collect-texts.mjs', 'scripts/generate_audio.py']
+permissions:
+  contents: write
+jobs:
+  audio:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 20 }
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+      - run: pip install edge-tts
+      - run: node scripts/collect-texts.mjs
+      - run: python scripts/generate_audio.py
+      - name: Commit âm thanh
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add public/audio
+          git diff --cached --quiet || (git commit -m "Cập nhật file âm thanh" && git push)
